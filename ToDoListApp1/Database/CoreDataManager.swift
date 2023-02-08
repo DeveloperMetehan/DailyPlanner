@@ -1,61 +1,110 @@
-//
-//  CoreDataManager.swift
-//  ToDoListApp1
-//
-//  Created by Metehan Karadeniz on 18.01.2023.
-//
-
-import Foundation
+import UIKit
 import CoreData
 
+protocol DataBaseProtocol {
+    func fetchAll<M: DataBaseEntity>(entityType: M.Type, completion: @escaping (Result<[M], DataBaseError>) -> Void)
+    func insert<M: DataBaseEntity>(entity: M) -> M
+    func update<M: DataBaseEntity>(entity: M) -> M
+    func delete<M: DataBaseEntity>(entity: M)
+}
 
-final class CoreDataManager {
+final class CoreDataManager: DataBaseProtocol {
+    static let shared = CoreDataManager(modelName: "ToDoListApp1")
+    private let modelName: String
     
-    static let shared = CoreDataManager()
-    private init() {}
+    private init(modelName: String) {
+        self.modelName = modelName
+        setupNotificationHandling()
+    }
+    
     private lazy var container: NSPersistentContainer = {
-        let container = NSPersistentContainer.init(name: "ToDoListApp1")
-        container.loadPersistentStores { (description, error ) in
+        let container = NSPersistentContainer(name: modelName)
+        container.loadPersistentStores { description, error in
             if let error = error as NSError? {
-                
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
         return container
     }()
-    //veri çekmeyi sağlar.
-    func fetch() -> [Todo] {
-        var result = [Todo]()
-        
-        let fetchRequest = NSFetchRequest<Todo>.init(entityName: "Todo")
+    
+    func fetchAll<M: DataBaseEntity>(entityType: M.Type, completion: @escaping (Result<[M], DataBaseError>) -> Void) {
         do {
-          result = try container.viewContext.fetch(fetchRequest)
+            let result = try container.viewContext.fetch(entityType.getFetchRequest())
+            guard let convertedResult = (result as? [M.DBObject])?.convert() as? [M] else {
+                completion(.failure(.casting("Could not casted to \(String(describing: entityType))")))
+                return
+            }
+            completion(.success(convertedResult))
         } catch {
-            print(error)
+            completion(.failure(.fetching(error.localizedDescription)))
         }
-       return result
     }
-    //kaydedilecek değerler için parametre oluşturup o parametleri databasedeki(Todo) tablonun attributesları ile eşleştirdik.
-    func insert(name: String,detail_description: String, date: String) -> Todo {
-        let todo = Todo.init(context: container.viewContext)
-        todo.name = name
-        todo.detail_description = detail_description
-        todo.date = date
-        return todo
+    
+    func insert<M: DataBaseEntity>(entity: M) -> M {
+        let newEntity = entity.insertToDB(context: container.viewContext)
+        return newEntity
     }
-    //coredataya kaydetmeyi sağlayacak fonksiyon.
-    func save() {
-        let context = container.viewContext
-        if context.hasChanges {
+    
+    func update<M: DataBaseEntity>(entity: M) -> M {
+        let updatedEntity = entity.updateInDb(context: container.viewContext)
+        return updatedEntity
+    }
+    
+    func delete<M: DataBaseEntity>(entity: M) {
+        guard let id = entity.dbId else {
+            print("DBId is nil")
+            return
+        }
+        let objectWillBeDeleted = container.viewContext.object(with: id)
+        container.viewContext.delete(objectWillBeDeleted)
+    }
+    
+    private func setupNotificationHandling() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(saveChanges),
+                                       name: UIApplication.willTerminateNotification,
+                                       object: nil)
+
+        notificationCenter.addObserver(self,
+                                       selector: #selector(saveChanges),
+                                       name: UIApplication.didEnterBackgroundNotification,
+                                       object: nil)
+    }
+    
+    @objc private func saveChanges() {
+        container.viewContext.perform {
             do {
-                try context.save()
+                if self.container.viewContext.hasChanges {
+                    try self.container.viewContext.save()
+                }
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print("Unable to Save Changes of Managed Object Context")
+                print("\(error), \(error.localizedDescription)")
             }
         }
     }
 }
 
+protocol DataBaseEntity {
+    var dbId: NSManagedObjectID? {get set}
+    static func getFetchRequest<M: NSManagedObject>() -> NSFetchRequest<M>
+    typealias DBObject = DBEntityConvertable
+    func insertToDB(context: NSManagedObjectContext) -> Self
+    func updateInDb(context: NSManagedObjectContext) -> Self
+}
+
+protocol DBEntityConvertable {
+    func convert() -> DataBaseEntity
+}
+
+extension Array where Element == DBEntityConvertable {
+    func convert() -> [DataBaseEntity] {
+        return self.map { $0.convert() }
+    }
+}
+
+enum DataBaseError: Error {
+    case fetching(String)
+    case casting(String)
+}

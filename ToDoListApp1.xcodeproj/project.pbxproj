@@ -17,7 +17,7 @@
 		928C9D2E296ADA2A00F6C2BF /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928C9D2D296ADA2A00F6C2BF /* HomeTableViewCell.swift */; };
 		928D9133297844390060439D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D9132297844390060439D /* CoreDataManager.swift */; };
 		928D9135297849480060439D /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D9134297849480060439D /* Todo.swift */; };
-		92AD697E296C3049009B904E /* CreatingNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD697D296C3049009B904E /* CreatingNoteViewController.swift */; };
+		92AD697E296C3049009B904E /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD697D296C3049009B904E /* NoteViewController.swift */; };
 		92AD6980296C320F009B904E /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD697F296C320F009B904E /* color.swift */; };
 		92AD698C296C8DCA009B904E /* CreatingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD698B296C8DCA009B904E /* CreatingCollectionViewCell.swift */; };
 		92AD698F296D7A10009B904E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD698E296D7A10009B904E /* ListViewController.swift */; };
@@ -27,6 +27,8 @@
 		92DE6B51296EB63C00134DAD /* PopUpForListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE6B50296EB63C00134DAD /* PopUpForListVC.swift */; };
 		92DE6B54296EC14700134DAD /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE6B53296EC14700134DAD /* TaskDetailViewController.swift */; };
 		92DE6B56296ED45200134DAD /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DE6B55296ED45200134DAD /* ListTableViewCell.swift */; };
+		CB9D71362994088A00BE520B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D71352994088A00BE520B /* HomeViewModel.swift */; };
+		CB9D71392994126500BE520B /* AddNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D71382994126500BE520B /* AddNoteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +44,7 @@
 		928C9D2D296ADA2A00F6C2BF /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		928D9132297844390060439D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		928D9134297849480060439D /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		92AD697D296C3049009B904E /* CreatingNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingNoteViewController.swift; sourceTree = "<group>"; };
+		92AD697D296C3049009B904E /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		92AD697F296C320F009B904E /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		92AD698B296C8DCA009B904E /* CreatingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingCollectionViewCell.swift; sourceTree = "<group>"; };
 		92AD698E296D7A10009B904E /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +54,8 @@
 		92DE6B50296EB63C00134DAD /* PopUpForListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpForListVC.swift; sourceTree = "<group>"; };
 		92DE6B53296EC14700134DAD /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		92DE6B55296ED45200134DAD /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		CB9D71352994088A00BE520B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CB9D71382994126500BE520B /* AddNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,15 +88,12 @@
 		928C9D15296AD94D00F6C2BF /* ToDoListApp1 */ = {
 			isa = PBXGroup;
 			children = (
+				CB9D7134299404B500BE520B /* Model */,
+				CB9D71322994023D00BE520B /* App */,
 				928D9131297844180060439D /* Database */,
+				CB9D71332994027A00BE520B /* Scene */,
 				92DE6B45296E1D4000134DAD /* Extensions */,
-				92DE6B52296EC13000134DAD /* TaskDetail */,
 				928C9D27296AD94F00F6C2BF /* Info.plist */,
-				928C9D16296AD94D00F6C2BF /* AppDelegate.swift */,
-				928C9D18296AD94D00F6C2BF /* SceneDelegate.swift */,
-				92AD698D296D79EE009B904E /* List */,
-				92AD697C296C2FB5009B904E /* CreatingNote */,
-				928C9D2F296ADA3C00F6C2BF /* Home */,
 				928C9D30296ADA4400F6C2BF /* Helpers */,
 			);
 			path = ToDoListApp1;
@@ -101,8 +102,9 @@
 		928C9D2F296ADA3C00F6C2BF /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				92DE6B3E296DCA4E00134DAD /* PopUp */,
+				CB9D71352994088A00BE520B /* HomeViewModel.swift */,
 				928C9D1A296AD94D00F6C2BF /* HomeViewController.swift */,
+				92DE6B3E296DCA4E00134DAD /* PopUp */,
 				928C9D2D296ADA2A00F6C2BF /* HomeTableViewCell.swift */,
 				92DE6B39296DC42B00134DAD /* PresentTransition */,
 			);
@@ -140,8 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				928D91362978A5790060439D /* DatePicker */,
-				92AD697D296C3049009B904E /* CreatingNoteViewController.swift */,
-				92AD698B296C8DCA009B904E /* CreatingCollectionViewCell.swift */,
 			);
 			path = CreatingNote;
 			sourceTree = "<group>";
@@ -195,6 +195,52 @@
 				92DE6B53296EC14700134DAD /* TaskDetailViewController.swift */,
 			);
 			path = TaskDetail;
+			sourceTree = "<group>";
+		};
+		CB9D71322994023D00BE520B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				928C9D16296AD94D00F6C2BF /* AppDelegate.swift */,
+				928C9D18296AD94D00F6C2BF /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		CB9D71332994027A00BE520B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				CB9D71372994123C00BE520B /* Note */,
+				928C9D2F296ADA3C00F6C2BF /* Home */,
+				92AD697C296C2FB5009B904E /* CreatingNote */,
+				92AD698D296D79EE009B904E /* List */,
+				92DE6B52296EC13000134DAD /* TaskDetail */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		CB9D7134299404B500BE520B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CB9D71372994123C00BE520B /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				CB9D71382994126500BE520B /* AddNoteViewModel.swift */,
+				92AD697D296C3049009B904E /* NoteViewController.swift */,
+				CB9D713A2994129600BE520B /* Cell */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		CB9D713A2994129600BE520B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				92AD698B296C8DCA009B904E /* CreatingCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92DE6B54296EC14700134DAD /* TaskDetailViewController.swift in Sources */,
+				CB9D71362994088A00BE520B /* HomeViewModel.swift in Sources */,
 				92DE6B3B296DC44500134DAD /* PresentTransation.swift in Sources */,
 				92AD6980296C320F009B904E /* color.swift in Sources */,
 				92DE6B3D296DC45200134DAD /* DismissTransation.swift in Sources */,
@@ -278,13 +325,14 @@
 				928C9D17296AD94D00F6C2BF /* AppDelegate.swift in Sources */,
 				92DE6B49296EAF3D00134DAD /* PopUpViewController.swift in Sources */,
 				92AD698F296D7A10009B904E /* ListViewController.swift in Sources */,
-				92AD697E296C3049009B904E /* CreatingNoteViewController.swift in Sources */,
+				92AD697E296C3049009B904E /* NoteViewController.swift in Sources */,
 				92AD698C296C8DCA009B904E /* CreatingCollectionViewCell.swift in Sources */,
 				92DE6B51296EB63C00134DAD /* PopUpForListVC.swift in Sources */,
 				928C9D19296AD94D00F6C2BF /* SceneDelegate.swift in Sources */,
 				928D9133297844390060439D /* CoreDataManager.swift in Sources */,
 				928D9135297849480060439D /* Todo.swift in Sources */,
 				92DE6B56296ED45200134DAD /* ListTableViewCell.swift in Sources */,
+				CB9D71392994126500BE520B /* AddNoteViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
